@@ -41,7 +41,7 @@ goog.require('goog.userAgent');
  * @param {string} className Name of class to add.
  * @private
  */
-Blockly.addClass_ = function(element, className) {
+Blockly.addClass_ = function (element, className) {
   var classes = element.getAttribute('class') || '';
   if ((' ' + classes + ' ').indexOf(' ' + className + ' ') == -1) {
     if (classes) {
@@ -58,7 +58,7 @@ Blockly.addClass_ = function(element, className) {
  * @param {string} className Name of class to remove.
  * @private
  */
-Blockly.removeClass_ = function(element, className) {
+Blockly.removeClass_ = function (element, className) {
   var classes = element.getAttribute('class');
   if ((' ' + classes + ' ').indexOf(' ' + className + ' ') != -1) {
     var classList = classes.split(/\s+/);
@@ -84,7 +84,7 @@ Blockly.removeClass_ = function(element, className) {
  * @return {boolean} True if class exists, false otherwise.
  * @private
  */
-Blockly.hasClass_ = function(element, className) {
+Blockly.hasClass_ = function (element, className) {
   var classes = element.getAttribute('class');
   return (' ' + classes + ' ').indexOf(' ' + className + ' ') != -1;
 };
@@ -98,9 +98,9 @@ Blockly.hasClass_ = function(element, className) {
  * @return {!Array.<!Array>} Opaque data that can be passed to unbindEvent_.
  * @private
  */
-Blockly.bindEvent_ = function(node, name, thisObject, func) {
+Blockly.bindEvent_ = function (node, name, thisObject, func) {
   if (thisObject) {
-    var wrapFunc = function(e) {
+    var wrapFunc = function (e) {
       func.call(thisObject, e);
     };
   } else {
@@ -110,7 +110,7 @@ Blockly.bindEvent_ = function(node, name, thisObject, func) {
   var bindData = [[node, name, wrapFunc]];
   // Add equivalent touch event.
   if (name in Blockly.bindEvent_.TOUCH_MAP) {
-    wrapFunc = function(e) {
+    wrapFunc = function (e) {
       // Punt on multitouch events.
       if (e.changedTouches.length == 1) {
         // Map the touch event's properties to the event.
@@ -152,7 +152,7 @@ if (goog.events.BrowserFeature.TOUCH_ENABLED) {
  * @return {!Function} The function call.
  * @private
  */
-Blockly.unbindEvent_ = function(bindData) {
+Blockly.unbindEvent_ = function (bindData) {
   while (bindData.length) {
     var bindDatum = bindData.pop();
     var node = bindDatum[0];
@@ -167,7 +167,7 @@ Blockly.unbindEvent_ = function(bindData) {
  * Don't do anything for this event, just halt propagation.
  * @param {!Event} e An event.
  */
-Blockly.noEvent = function(e) {
+Blockly.noEvent = function (e) {
   // This event has been handled.  No need to bubble up to the document.
   e.preventDefault();
   e.stopPropagation();
@@ -179,12 +179,12 @@ Blockly.noEvent = function(e) {
  * @return {boolean} True if text input.
  * @private
  */
-Blockly.isTargetInput_ = function(e) {
+Blockly.isTargetInput_ = function (e) {
   return e.target.type == 'textarea' || e.target.type == 'text' ||
-         e.target.type == 'number' || e.target.type == 'email' ||
-         e.target.type == 'password' || e.target.type == 'search' ||
-         e.target.type == 'tel' || e.target.type == 'url' ||
-         e.target.isContentEditable;
+    e.target.type == 'number' || e.target.type == 'email' ||
+    e.target.type == 'password' || e.target.type == 'search' ||
+    e.target.type == 'tel' || e.target.type == 'url' ||
+    e.target.isContentEditable;
 };
 
 /**
@@ -194,7 +194,7 @@ Blockly.isTargetInput_ = function(e) {
  * @return {!goog.math.Coordinate} Object with .x and .y properties.
  * @private
  */
-Blockly.getRelativeXY_ = function(element) {
+Blockly.getRelativeXY_ = function (element) {
   var xy = new goog.math.Coordinate(0, 0);
   // First, check for x and y attributes.
   var x = element.getAttribute('x');
@@ -227,7 +227,7 @@ Blockly.getRelativeXY_ = function(element) {
  * @private
  */
 Blockly.getRelativeXY_.XY_REGEXP_ =
-    /translate\(\s*([-+\d.e]+)([ ,]\s*([-+\d.e]+)\s*\))?/;
+  /translate\(\s*([-+\d.e]+)([ ,]\s*([-+\d.e]+)\s*\))?/;
 
 /**
  * Return the absolute coordinates of the top-left corner of this element,
@@ -238,12 +238,12 @@ Blockly.getRelativeXY_.XY_REGEXP_ =
  * @return {!goog.math.Coordinate} Object with .x and .y properties.
  * @private
  */
-Blockly.getSvgXY_ = function(element, workspace) {
+Blockly.getSvgXY_ = function (element, workspace) {
   var x = 0;
   var y = 0;
   var scale = 1;
   if (goog.dom.contains(workspace.getCanvas(), element) ||
-      goog.dom.contains(workspace.getBubbleCanvas(), element)) {
+    goog.dom.contains(workspace.getBubbleCanvas(), element)) {
     // Before the SVG canvas, scale the coordinates.
     scale = workspace.scale;
   }
@@ -251,7 +251,7 @@ Blockly.getSvgXY_ = function(element, workspace) {
     // Loop through this block and every parent.
     var xy = Blockly.getRelativeXY_(element);
     if (element == workspace.getCanvas() ||
-        element == workspace.getBubbleCanvas()) {
+      element == workspace.getBubbleCanvas()) {
       // After the SVG canvas, don't scale the coordinates.
       scale = 1;
     }
@@ -271,9 +271,35 @@ Blockly.getSvgXY_ = function(element, workspace) {
  *     context (scale...).
  * @return {!SVGElement} Newly created SVG element.
  */
-Blockly.createSvgElement = function(name, attrs, parent, opt_workspace) {
+Blockly.createSvgElement = function (name, attrs, parent, opt_workspace) {
   var e = /** @type {!SVGElement} */ (
-      document.createElementNS(Blockly.SVG_NS, name));
+    document.createElementNS(Blockly.SVG_NS, name));
+  for (var key in attrs) {
+    e.setAttribute(key, attrs[key]);
+  }
+  // IE defines a unique attribute "runtimeStyle", it is NOT applied to
+  // elements created with createElementNS. However, Closure checks for IE
+  // and assumes the presence of the attribute and crashes.
+  if (document.body.runtimeStyle) {  // Indicates presence of IE-only attr.
+    e.runtimeStyle = e.currentStyle = e.style;
+  }
+  if (parent) {
+    parent.appendChild(e);
+  }
+  return e;
+};
+
+/**
+ * Helper method for creating HTML elements.
+ * @param name
+ * @param attrs
+ * @param parent
+ * @param opt_workspace
+ * @returns {!HtmlElement}
+ */
+Blockly.createHtmlElement = function (name, attrs, parent, opt_workspace) {
+  var e = /** @type {!HtmlElement} */ (
+    document.createElementNS(Blockly.HTML_NS, name));
   for (var key in attrs) {
     e.setAttribute(key, attrs[key]);
   }
@@ -294,7 +320,7 @@ Blockly.createSvgElement = function(name, attrs, parent, opt_workspace) {
  * @param {!Event} e Mouse event.
  * @return {boolean} True if right-click.
  */
-Blockly.isRightButton = function(e) {
+Blockly.isRightButton = function (e) {
   if (e.ctrlKey && goog.userAgent.MAC) {
     // Control-clicking on Mac OS X is treated as a right-click.
     // WebKit on Mac OS X fails to change button to 2 (but Gecko does).
@@ -311,7 +337,7 @@ Blockly.isRightButton = function(e) {
  * @param {SVGMatrix} matrix Inverted screen CTM to use.
  * @return {!Object} Object with .x and .y properties.
  */
-Blockly.mouseToSvg = function(e, svg, matrix) {
+Blockly.mouseToSvg = function (e, svg, matrix) {
   var svgPoint = svg.createSVGPoint();
   svgPoint.x = e.clientX;
   svgPoint.y = e.clientY;
@@ -327,7 +353,7 @@ Blockly.mouseToSvg = function(e, svg, matrix) {
  * @param {!Array.<string>} array Array of strings.
  * @return {number} Length of shortest string.
  */
-Blockly.shortestStringLength = function(array) {
+Blockly.shortestStringLength = function (array) {
   if (!array.length) {
     return 0;
   }
@@ -345,7 +371,7 @@ Blockly.shortestStringLength = function(array) {
  * @param {number=} opt_shortest Length of shortest string.
  * @return {number} Length of common prefix.
  */
-Blockly.commonWordPrefix = function(array, opt_shortest) {
+Blockly.commonWordPrefix = function (array, opt_shortest) {
   if (!array.length) {
     return 0;
   } else if (array.length == 1) {
@@ -380,7 +406,7 @@ Blockly.commonWordPrefix = function(array, opt_shortest) {
  * @param {number=} opt_shortest Length of shortest string.
  * @return {number} Length of common suffix.
  */
-Blockly.commonWordSuffix = function(array, opt_shortest) {
+Blockly.commonWordSuffix = function (array, opt_shortest) {
   if (!array.length) {
     return 0;
   } else if (array.length == 1) {
@@ -413,7 +439,7 @@ Blockly.commonWordSuffix = function(array, opt_shortest) {
  * @param {string} str Input string.
  * @return {boolean} True if number, false otherwise.
  */
-Blockly.isNumber = function(str) {
+Blockly.isNumber = function (str) {
   return !!str.match(/^\s*-?\d+(\.\d+)?\s*$/);
 };
 
@@ -423,7 +449,7 @@ Blockly.isNumber = function(str) {
  * @param {string} message Text containing interpolation tokens.
  * @return {!Array.<string|number>} Array of strings and numbers.
  */
-Blockly.utils.tokenizeInterpolation = function(message) {
+Blockly.utils.tokenizeInterpolation = function (message) {
   var tokens = [];
   var chars = message.split('');
   chars.push('');  // End marker.
@@ -480,7 +506,7 @@ Blockly.utils.tokenizeInterpolation = function(message) {
  * 87 characters ^ 20 length > 128 bits (better than a UUID).
  * @return {string} A globally unique ID string.
  */
-Blockly.genUid = function() {
+Blockly.genUid = function () {
   var length = 20;
   var soupLength = Blockly.genUid.soup_.length;
   var id = [];
@@ -497,7 +523,7 @@ Blockly.genUid = function() {
  * @private
  */
 Blockly.genUid.soup_ = '!#%()*+,-./:;=?@[]^_`{|}~' +
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 /**
  * Wrap text to the specified width.
@@ -505,7 +531,7 @@ Blockly.genUid.soup_ = '!#%()*+,-./:;=?@[]^_`{|}~' +
  * @param {number} limit Width to wrap each line.
  * @return {string} Wrapped text.
  */
-Blockly.utils.wrap = function(text, limit) {
+Blockly.utils.wrap = function (text, limit) {
   var lines = text.split('\n');
   for (var i = 0; i < lines.length; i++) {
     lines[i] = Blockly.utils.wrap_line_(lines[i], limit);
@@ -520,7 +546,7 @@ Blockly.utils.wrap = function(text, limit) {
  * @return {string} Wrapped text.
  * @private
  */
-Blockly.utils.wrap_line_ = function(text, limit) {
+Blockly.utils.wrap_line_ = function (text, limit) {
   if (text.length <= limit) {
     // Short text, no need to wrap.
     return text;
@@ -571,7 +597,7 @@ Blockly.utils.wrap_line_ = function(text, limit) {
  * @return {number} Larger the better.
  * @private
  */
-Blockly.utils.wrapScore_ = function(words, wordBreaks, limit) {
+Blockly.utils.wrapScore_ = function (words, wordBreaks, limit) {
   // If this function becomes a performance liability, add caching.
   // Compute the length of each line.
   var lineLengths = [0];
@@ -608,7 +634,7 @@ Blockly.utils.wrapScore_ = function(words, wordBreaks, limit) {
   // aaa bbb
   // ccc ddd eee
   if (lineLengths.length > 1 && lineLengths[lineLengths.length - 1] <=
-      lineLengths[lineLengths.length - 2]) {
+    lineLengths[lineLengths.length - 2]) {
     score += 0.5;
   }
   return score;
@@ -623,7 +649,7 @@ Blockly.utils.wrapScore_ = function(words, wordBreaks, limit) {
  * @return {!Array.<boolean>} New array of optimal line breaks.
  * @private
  */
-Blockly.utils.wrapMutate_ = function(words, wordBreaks, limit) {
+Blockly.utils.wrapMutate_ = function (words, wordBreaks, limit) {
   var bestScore = Blockly.utils.wrapScore_(words, wordBreaks, limit);
   var bestBreaks;
   // Try shifting every line break forward or backward.
@@ -635,7 +661,7 @@ Blockly.utils.wrapMutate_ = function(words, wordBreaks, limit) {
     mutatedWordBreaks[i] = !mutatedWordBreaks[i];
     mutatedWordBreaks[i + 1] = !mutatedWordBreaks[i + 1];
     var mutatedScore =
-        Blockly.utils.wrapScore_(words, mutatedWordBreaks, limit);
+      Blockly.utils.wrapScore_(words, mutatedWordBreaks, limit);
     if (mutatedScore > bestScore) {
       bestScore = mutatedScore;
       bestBreaks = mutatedWordBreaks;
@@ -656,7 +682,7 @@ Blockly.utils.wrapMutate_ = function(words, wordBreaks, limit) {
  * @return {string} Plain text.
  * @private
  */
-Blockly.utils.wrapToText_ = function(words, wordBreaks) {
+Blockly.utils.wrapToText_ = function (words, wordBreaks) {
   var text = [];
   for (var i = 0; i < words.length; i++) {
     text.push(words[i]);
