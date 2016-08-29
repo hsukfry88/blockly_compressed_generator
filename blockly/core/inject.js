@@ -186,7 +186,6 @@ Blockly.createMainWorkspace_ = function(svg, options) {
   options.getMetrics = Blockly.getMainWorkspaceMetrics_;
   options.setMetrics = Blockly.setMainWorkspaceMetrics_;
   var mainWorkspace = new Blockly.WorkspaceSvg(options);
-  mainWorkspace.scale = options.zoomOptions.startScale;
   svg.appendChild(mainWorkspace.createDom('blocklyMainBackground'));
   // A null translation will also apply the correct initial scale.
   mainWorkspace.translate(0, 0);
