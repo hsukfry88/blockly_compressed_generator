@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Fixed Blockly</title>
+  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blocks_compressed.js"></script>
+  <script src="../../msg/js/en.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+<body>
+<h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+  <a href="../index.html">Demos</a> &gt; Fixed Blockly</h1>
+
+<p>This is a simple demo of injecting Blockly into a fixed-sized 'div' element.</p>
+
+<p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure-blockly/web/fixed-size">injecting
+  fixed-sized Blockly</a>&hellip;</p>
+
+<div id="blocklyDiv" style="height: 800px; width: 800px;"></div>
+
+<xml id="toolbox">
+  <block type="controls_if"></block>
+  <block type="logic_compare"></block>
+  <block type="controls_repeat_ext"></block>
+  <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+  <block type="text"></block>
+  <block type="text_print"></block>
+  <block type="test123"></block>
+</xml>
+
+<script>
+  Blockly.Blocks['start_block'] = {
+    init: function () {
+      this.appendDummyInput()
+          .appendField("\"시작하기!\"");
+      this.setInputsInline(true);
+      this.setNextStatement(true, null);
+      this.setColour(240);
+    }
+  };
+
+
+  Blockly.Blocks['test123'] = {
+    init: function () {
+      this.appendDummyInput()
+          .appendField("개인블록");
+      this.appendValueInput("abc")
+          .setCheck(null);
+      this.setInputsInline(true);
+      this.setColour(230);
+      this.setTooltip('');
+      this.setHelpUrl('http://www.example.com/');
+      this.setWarningText('Must have an input block.');
+    }
+  };
+</script>
+
+<script>
+  var workspace = Blockly.inject('blocklyDiv',
+      {
+        media: '../../media/',
+        zoom: {
+          controls: true,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2
+        },
+        toolbox: document.getElementById('toolbox')
+      });
+
+  var textxml = '<xml><block type="start_block" x="20" y="22" movable="false" deletable="false"></block></xml>';
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(textxml));      //초기 블록 셋팅
+
+</script>
+
+</body>
+</html>
