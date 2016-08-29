@@ -385,6 +385,7 @@ Blockly.duplicate_ = function(block) {
   Blockly.clipboardSource_ = clipboardSource;
 };
 
+// 선택영역부터 하위 블록들 모두 copy&paste가 가능하도록 해주는 Function
 Blockly.until_duplicate_ = function(block) {
   // Save the clipboard.
   var clipboardXml = Blockly.clipboardXml_;
