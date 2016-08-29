@@ -202,7 +202,9 @@ Blockly.Css.CONTENT = [
     'stroke-linecap: round;',
     'stroke-width: 1;',
   '}',
-
+  '.blocklyOnlyReadable .blocklySelected>.blocklyPath {',
+    'fill: #fc3',
+  '}',
   '.blocklySelected>.blocklyPath {',
     'stroke: #fc3;',
     'stroke-width: 3px;',
