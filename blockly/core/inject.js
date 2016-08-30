@@ -50,11 +50,11 @@ Blockly.inject = function (container, opt_options) {
     throw 'Error: container is not in current document.';
   }
   var options = new Blockly.Options(opt_options || {});
-  Blockly.mainSvg = Blockly.createDom_(container, options);
-  var workspace = Blockly.createMainWorkspace_(Blockly.mainSvg, options);
+  Blockly.workspaceSvg = Blockly.createDom_(container, options);
+  var workspace = Blockly.createMainWorkspace_(Blockly.workspaceSvg, options);
   Blockly.init_(workspace);
   workspace.markFocused();
-  Blockly.bindEvent_(Blockly.mainSvg, 'focus', workspace, workspace.markFocused);
+  Blockly.bindEvent_(Blockly.workspaceSvg, 'focus', workspace, workspace.markFocused);
   Blockly.svgResize(workspace);
   return workspace;
 };
@@ -71,6 +71,8 @@ Blockly.createDom_ = function (container, options) {
   // out content in RTL mode.  Therefore Blockly forces the use of LTR,
   // then manually positions content in RTL as needed.
   container.setAttribute('dir', 'LTR');
+  container.setAttribute('style', 'position: relative;');
+
   // Closure can be trusted to create HTML widgets with the proper direction.
   goog.ui.Component.setDefaultRightToLeft(options.RTL);
 
@@ -88,6 +90,7 @@ Blockly.createDom_ = function (container, options) {
    ...
    </svg>
    */
+
   var cover = Blockly.createHtmlElement('div', {
     'id': 'workspaceCover'
   }, container);

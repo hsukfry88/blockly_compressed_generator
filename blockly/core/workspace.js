@@ -172,13 +172,13 @@ Blockly.Workspace.prototype.getAllBlocks = function () {
  */
 Blockly.Workspace.prototype.setOnlyReadable = function (isReadable) {
   var cover = document.getElementById("workspaceCover");
-  var hasClass = Blockly.hasClass_((Blockly.mainSvg), 'blocklyOnlyReadable');
+  var hasClass = Blockly.hasClass_((Blockly.workspaceSvg), 'blocklyOnlyReadable');
   if (isReadable) {
     cover.style.display = "block";
-    if (!hasClass) Blockly.addClass_((Blockly.mainSvg), 'blocklyOnlyReadable');
+    if (!hasClass) Blockly.addClass_((Blockly.workspaceSvg), 'blocklyOnlyReadable');
   } else {
     cover.style.display = "none";
-    if (hasClass) Blockly.removeClass_((Blockly.mainSvg), 'blocklyOnlyReadable');
+    if (hasClass) Blockly.removeClass_((Blockly.workspaceSvg), 'blocklyOnlyReadable');
   }
 
 };
