@@ -65,17 +65,31 @@
       this.setWarningText('Must have an input block.');
     }
   };
+  Blockly.Blocks['test123'] = {
+    init: function () {
+      this.appendDummyInput()
+              .appendField("개인블록rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+      this.appendValueInput("abc")
+              .setCheck(null);
+      this.setInputsInline(true);
+      this.setColour(230);
+      this.setTooltip('');
+      this.setHelpUrl('http://www.example.com/');
+      this.setWarningText('Must have an input block.');
+    }
+  };
 </script>
 
 <script>
   var workspace = Blockly.inject('blocklyDiv',
       {
         media: '../../media/',
-        toolbox: document.getElementById('toolbox')
+        toolbox: document.getElementById('toolbox'),
+        scrollbars: true
       });
 
-  var textxml = '<xml><block type="start_block" x="20" y="22" movable="false" deletable="false"></block></xml>';
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(textxml));      //초기 블록 셋팅
+//  var textxml = '<xml><block type="start_block" x="20" y="22" movable="false" deletable="false"></block></xml>';
+//  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(textxml));      //초기 블록 셋팅
 
 </script>
 
