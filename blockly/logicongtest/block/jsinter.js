@@ -4,6 +4,42 @@ Blockly.inject(document.getElementById('blocklyDiv'), {
   toolbox: document.getElementById('toolbox')
 });
 
+
+function onFirstComment(event) {
+  //새로이 추가하는 블록에 대한 숨김 처리.
+  if (Blockly.mainWorkspace.topBlocks_.length > 1) {
+    for (var i = 1; i < Blockly.mainWorkspace.topBlocks_.length; i++){
+      Blockly.mainWorkspace.topBlocks_[i].setUnusabled(true);
+      if (Blockly.mainWorkspace.topBlocks_[i].childBlocks_.length > 0) {
+        var temp = Blockly.mainWorkspace.topBlocks_[i].childBlocks_[0];
+        while (true) {
+          temp.setUnusabled(true);
+          if (temp.childBlocks_.length > 0) {
+            temp = temp.childBlocks_[0];
+          } else {
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  //Start 블록 하위에 대한 사용 처리
+  if (Blockly.mainWorkspace.topBlocks_[0].childBlocks_.length > 0) {
+    var temp = Blockly.mainWorkspace.topBlocks_[0].childBlocks_[0];
+    while (true) {
+      temp.setUnusabled(false);
+      if (temp.childBlocks_.length > 0) {
+        temp = temp.childBlocks_[0];
+      } else {
+        break;
+      }
+    }
+  }
+}
+Blockly.mainWorkspace.addChangeListener(onFirstComment);
+
+
 // var textxml = '<xml><block type="start_block" x="20" y="22" movable="false" deletable="false"></block></xml>';
 // var textxml = '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="start_block" id="dWMA}csFBbmk*`IsQhkb" deletable="false" movable="false" x="20" y="22"><next><block type="move_forward" id="nHc=}S,*T4SIg|5vt0`="><next><block type="controls_repeat_ext" id="_F_Y~m78ftRx`4aOULji"><value name="TIMES"><shadow type="math_number" id="R-;.!8wRq:a~M?(5T.,2"><field name="NUM">4</field></shadow></value><statement name="DO"><block type="controls_repeat_ext" id="5n;@9x]U=4?mNW*Vq(G+"><value name="TIMES"><shadow type="math_number" id=":YyzWY=^trtt+%0`97w3"><field name="NUM">3</field></shadow></value><statement name="DO"><block type="move_forward" id="wzw;%d%4b#NEPdcm=T:*"><next><block type="move_forward" id="sb[rtNE8~|~1=539(P+%"><next><block type="move_rotate" id="Jm{jz@v3IQmD_!1o,eKz"><field name="ROTATE">"right"</field></block></next></block></next></block></statement><next><block type="controls_repeat_ext" id="pW18vjj;-RpG=DIH0IDH"><value name="TIMES"><shadow type="math_number" id=")**q1j[Y+wIm+-iT/i#V"><field name="NUM">4</field></shadow></value><statement name="DO"><block type="move_forward" id=");d7ZCtVYBAJqM_./Ii*"></block></statement></block></next></block></statement></block></next></block></next></block></xml>'
 // Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(textxml));      //초기 블록 셋팅
