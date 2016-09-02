@@ -11,4 +11,4 @@ blockly_uncompressed.js
 blocks_compressed.js
 dart_compressed.js
 javascript_compressed.js
-msg
+msg/js
