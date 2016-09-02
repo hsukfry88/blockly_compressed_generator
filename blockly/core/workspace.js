@@ -327,8 +327,7 @@ Blockly.Workspace.prototype.fireChangeListener = function (event) {
     /**
      * 이동이벤트가 발생할때마다 block의 parentId가 없을때까지 가져온 후 이 블록이 type에 start가 없을경우 unUsabled를 사용!!
      */
-    if (event.type == Blockly.Events.MOVE) {
-      // console.log(this.getBlockById(event.blockId));
+    if (event.type == Blockly.Events.MOVE && (event.oldParentId != undefined || event.newParentId != undefined)) {
       var block = this.getBlockById(event.blockId);
       if (block != null) {
         var childBlocks = block.getDescendants();

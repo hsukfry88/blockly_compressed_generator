@@ -56,6 +56,10 @@ goog.require('goog.userAgent');
 // Turn off debugging when compiled.
 var CLOSURE_DEFINES = {'goog.DEBUG': false};
 
+/**
+ * 시작하기 블록 정의(혼자있어도 안 투명해지는애들?)
+ * @type {string[]}
+ */
 Blockly.startBlockTypes = ["start_block"];
 
 /**
