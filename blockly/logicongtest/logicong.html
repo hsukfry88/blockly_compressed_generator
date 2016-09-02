@@ -136,6 +136,19 @@
   <block type="move_left"></block>
   <block type="move_down"></block>
   <block type="move_top"></block>
+  <block type="move_forward"></block>
+  <block type="move_rotate"></block>
+  <block type="controls_repeat_ext">
+    <value name="TIMES">
+      <shadow type="math_number">
+        <field name="NUM">3</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="controls_repeat_ext"></block>
+  <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+
 </xml>
 </body>
 <!--createjs CDN-->
@@ -151,10 +164,10 @@
 <script src="block/jsinter.js"></script>
 
 <!--create js custom-->
-<script src="create/stage_1_3_5_3.js"></script>
-<script src="create/game-es6-353.js"></script>
+<script src="create/stage_1_4_1_5.js"></script>
+<script src="create/game-es6-415.js"></script>
 <script>
-  var textxml = '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="start_block" id="=;ImrW,Sa9A)h8Vx4MeI" deletable="false" movable="false" x="20" y="22"><next><block type="move_down" id="48}k[PTs~!kRV7o6N,[0"><next><block type="move_down" id="kn9.muAqCX+2`ya~Cxy."><next><block type="move_right" id="8*{zalcO7Rb5zD[#DM.s"><next><block type="move_right" id="u`_}M5Z@M0HwvP_{LPee"><next><block type="move_right" id="^INE^=u)6i:l3SXmFCm5"><next><block type="move_down" id="H[dGP%],6yF|d;vUH__M"><next><block type="move_right" id="H0+HxGJ4dmGCCA}aJh,_"><next><block type="move_right" id="Mb@diQ1@]RT,bnBQzhnV"><next><block type="move_right" id="jq,%/4.7dX8?LXC{d;s^"><next><block type="move_right" id="GScuAD*)pln2zGlJQk_C"><next><block type="move_down" id="k99nhh2M9TU0LF7R)bwc"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>';
+  var textxml = '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="start_block" id="q5y7Vy_E[S?o+AtqgedD" deletable="false" movable="false" x="20" y="22"><next><block type="move_forward" id="QKU2)pz~[[jLj?W]k2`x"><next><block type="controls_repeat_ext" id="Gm2T=bNn-?1*z`^{P#]Y"><value name="TIMES"><shadow type="math_number" id="Yd0G*3u(;m6HF`zg`-#5"><field name="NUM">4</field></shadow></value><statement name="DO"><block type="controls_repeat_ext" id="4{uyDO#mP=c)b~Mo2N)~"><value name="TIMES"><shadow type="math_number" id="k_n!Z#0/RPCKv|*ij}hK"><field name="NUM">3</field></shadow></value><statement name="DO"><block type="move_forward" id="L%|e1IUysB/=gSq,?G:#"><next><block type="move_forward" id="*IlBzjBf!5ioRSt+~YDN"><next><block type="move_rotate" id="BV*4C!)L/ow5HjDm#ih?"><field name="ROTATE">"right"</field></block></next></block></next></block></statement><next><block type="controls_repeat_ext" id="WKon#qz6O]cC@y*9EuM#"><value name="TIMES"><shadow type="math_number" id="@65yxHSh-y]iXl^EGaz}"><field name="NUM">4</field></shadow></value><statement name="DO"><block type="move_forward" id="=saN1yv_}^DI[Z=sIQ,V"></block></statement></block></next></block></statement></block></next></block></next></block></xml>';
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(textxml));      //초기 블록 셋팅
   Blockly.mainWorkspace.clearUndo();
 </script>
