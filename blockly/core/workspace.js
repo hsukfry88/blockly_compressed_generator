@@ -324,6 +324,27 @@ Blockly.Workspace.prototype.fireChangeListener = function (event) {
     if (this.undoStack_.length > this.MAX_UNDO) {
       this.undoStack_.unshift();
     }
+    /**
+     * 이동이벤트가 발생할때마다 block의 parentId가 없을때까지 가져온 후 이 블록이 type에 start가 없을경우 unUsabled를 사용!!
+     */
+    if (event.type == Blockly.Events.MOVE) {
+      // console.log(this.getBlockById(event.blockId));
+      var block = this.getBlockById(event.blockId);
+      if (block != null) {
+        var childBlocks = block.getDescendants();
+        if (Blockly.startBlockTypes.indexOf(block.getRootBlock().type) == -1) {
+          block.setUnusabled(true);
+          for (var i = 0; i < childBlocks.length; i++) {
+            childBlocks[i].setUnusabled(true);
+          }
+        } else {
+          block.setUnusabled(false);
+          for (var i = 0; i < childBlocks.length; i++) {
+            childBlocks[i].setUnusabled(false);
+          }
+        }
+      }
+    }
   }
   for (var i = 0, func; func = this.listeners_[i]; i++) {
     func(event);

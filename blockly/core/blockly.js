@@ -56,6 +56,8 @@ goog.require('goog.userAgent');
 // Turn off debugging when compiled.
 var CLOSURE_DEFINES = {'goog.DEBUG': false};
 
+Blockly.startBlockTypes = ["start_block"];
+
 /**
  * The main workspace most recently used.
  * Set by Blockly.WorkspaceSvg.prototype.markFocused

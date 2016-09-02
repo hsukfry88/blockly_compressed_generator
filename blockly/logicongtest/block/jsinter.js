@@ -4,40 +4,40 @@ Blockly.inject(document.getElementById('blocklyDiv'), {
   toolbox: document.getElementById('toolbox')
 });
 
-
-function onFirstComment(event) {
-  //새로이 추가하는 블록에 대한 숨김 처리.
-  if (Blockly.mainWorkspace.topBlocks_.length > 1) {
-    for (var i = 1; i < Blockly.mainWorkspace.topBlocks_.length; i++){
-      Blockly.mainWorkspace.topBlocks_[i].setUnusabled(true);
-      if (Blockly.mainWorkspace.topBlocks_[i].childBlocks_.length > 0) {
-        var temp = Blockly.mainWorkspace.topBlocks_[i].childBlocks_[0];
-        while (true) {
-          temp.setUnusabled(true);
-          if (temp.childBlocks_.length > 0) {
-            temp = temp.childBlocks_[0];
-          } else {
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  //Start 블록 하위에 대한 사용 처리
-  if (Blockly.mainWorkspace.topBlocks_[0].childBlocks_.length > 0) {
-    var temp = Blockly.mainWorkspace.topBlocks_[0].childBlocks_[0];
-    while (true) {
-      temp.setUnusabled(false);
-      if (temp.childBlocks_.length > 0) {
-        temp = temp.childBlocks_[0];
-      } else {
-        break;
-      }
-    }
-  }
-}
-Blockly.mainWorkspace.addChangeListener(onFirstComment);
+//
+// function checkUsableBlock(event) {
+//   //새로이 추가하는 블록에 대한 숨김 처리.
+//   if (Blockly.mainWorkspace.topBlocks_.length > 1) {
+//     for (var i = 1; i < Blockly.mainWorkspace.topBlocks_.length; i++){
+//       Blockly.mainWorkspace.topBlocks_[i].setUnusabled(true);
+//       if (Blockly.mainWorkspace.topBlocks_[i].childBlocks_.length > 0) {
+//         var temp = Blockly.mainWorkspace.topBlocks_[i].childBlocks_[0];
+//         while (true) {
+//           temp.setUnusabled(true);
+//           if (temp.childBlocks_.length > 0) {
+//             temp = temp.childBlocks_[0];
+//           } else {
+//             break;
+//           }
+//         }
+//       }
+//     }
+//   }
+//
+//   //Start 블록 하위에 대한 사용 처리
+//   if (Blockly.mainWorkspace.topBlocks_[0].childBlocks_.length > 0) {
+//     var temp = Blockly.mainWorkspace.topBlocks_[0].childBlocks_[0];
+//     while (true) {
+//       temp.setUnusabled(false);
+//       if (temp.childBlocks_.length > 0) {
+//         temp = temp.childBlocks_[0];
+//       } else {
+//         break;
+//       }
+//     }
+//   }
+// }
+// Blockly.mainWorkspace.addChangeListener(checkUsableBlock);
 
 
 // var textxml = '<xml><block type="start_block" x="20" y="22" movable="false" deletable="false"></block></xml>';

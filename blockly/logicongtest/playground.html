@@ -156,5 +156,6 @@
 <script>
   var textxml = '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="start_block" id="=;ImrW,Sa9A)h8Vx4MeI" deletable="false" movable="false" x="20" y="22"><next><block type="move_down" id="48}k[PTs~!kRV7o6N,[0"><next><block type="move_down" id="kn9.muAqCX+2`ya~Cxy."><next><block type="move_right" id="8*{zalcO7Rb5zD[#DM.s"><next><block type="move_right" id="u`_}M5Z@M0HwvP_{LPee"><next><block type="move_right" id="^INE^=u)6i:l3SXmFCm5"><next><block type="move_down" id="H[dGP%],6yF|d;vUH__M"><next><block type="move_right" id="H0+HxGJ4dmGCCA}aJh,_"><next><block type="move_right" id="Mb@diQ1@]RT,bnBQzhnV"><next><block type="move_right" id="jq,%/4.7dX8?LXC{d;s^"><next><block type="move_right" id="GScuAD*)pln2zGlJQk_C"><next><block type="move_down" id="k99nhh2M9TU0LF7R)bwc"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>';
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, Blockly.Xml.textToDom(textxml));      //초기 블록 셋팅
+  Blockly.mainWorkspace.clearUndo();
 </script>
 </html>
